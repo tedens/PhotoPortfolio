@@ -1,25 +1,15 @@
 <template>
   <v-app>
     <v-toolbar dense dark tab  height="30px">
-      <!-- <v-spacer></v-spacer>
-      <v-toolbar-items>
-        <v-btn flat>Home</v-btn>
-        <v-btn flat>Trabalhos</v-btn>
-        <v-btn flat>Sobre</v-btn>
-        <v-btn flat>Contato</v-btn>
-      </v-toolbar-items> -->
       <v-tabs centered slider-color="white" show-arrows height="30px">
         <v-tab>
           <v-btn small flat to="/">Home</v-btn>
         </v-tab>
         <v-tab>
-          <v-btn small flat to="/portfolio">Trabalhos</v-btn>
+          <v-btn small flat to="/portfolio">Portfolio</v-btn>
         </v-tab>
         <v-tab>
-           <v-btn small flat>Sobre</v-btn>
-        </v-tab>
-        <v-tab>
-          <v-btn small flat to="/contact">Contato</v-btn>
+          <v-btn small flat to="/contact">Contact</v-btn>
         </v-tab>
       </v-tabs>
     </v-toolbar>
@@ -28,7 +18,7 @@
     </v-container>
     <v-footer>
       <v-spacer></v-spacer>
-      <span>Desenvolvido por Guilherme Maegava &copy; {{new Date().getFullYear()}}</span>
+      <span>Photos by Anthony (TJ) Edens &copy; {{new Date().getFullYear()}}</span>
     </v-footer>
   </v-app>
 </template>
@@ -47,7 +37,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Caio Brum'
+      title: 'Anthony Edens'
     }
   },
   name: 'App'

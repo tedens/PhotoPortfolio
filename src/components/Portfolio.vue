@@ -2,7 +2,7 @@
   <v-container fluid id="main_container">
       <v-layout>
           <v-flex>
-              <h3 class="display-3 text-xs-center">Portifólio</h3>
+              <h3 class="display-3 text-xs-center">Portfolio</h3>
           </v-flex>
       </v-layout>
       <v-layout mx-2 elevation-6>
@@ -11,11 +11,11 @@
                 <v-container fluid row wrap py-0>
                     <v-layout row wrap>
                         <v-flex xs3 my-0 pr-2>
-                            <v-select label="Categoria" my-0 py-0
+                            <v-select label="Categories" my-0 py-0
                             :items="categories"></v-select>
                         </v-flex>
                         <v-flex px-2>
-                            <v-text-field prepend-icon="search" label="Pesquisar" hide-details single-line></v-text-field>
+                            <v-text-field prepend-icon="search" label="Search" hide-details single-line></v-text-field>
                         </v-flex>
                     </v-layout>
                 </v-container>
@@ -51,15 +51,18 @@
 export default {
   data: () => ({
     images: [
-        {src: '/static/img/img1.jpg', category: 'Evento'},
-        {src: '/static/img/img2.jpg', category: 'Comida'},
-        {src: '/static/img/img3.jpg', category: 'Ensaio'},
-        {src: '/static/img/img4.jpg', category: 'Ensaio'}
     ],
     categories: [
-      'Ensaio', 'Evento', 'New Born', 'Comida'
+      'Events', 'Nature', 'Portraits', 'Animals'
     ]
-  })
+  }),
+  methods:
+    getPhotos(){
+      //open serverless rds to get list of photos (last 50 and lazy load them in)
+    },
+    getSpecificPhotos(event){
+      //open serverless rds and get all images that match the event type
+    }
 }
 </script>
 
@@ -68,5 +71,3 @@ export default {
     max-width: 1260px;
 }
 </style>
-
-

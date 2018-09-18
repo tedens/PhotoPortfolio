@@ -2,7 +2,7 @@
   <v-container id="main_container" fluid px-0 py-0>
     <v-layout row wrap>
       <v-flex xs12 sm5 md4 lg2 px-2 py-2>
-        <h2 class="text-xs-center text-sm-left">Caio Brum <v-icon large color="black">photo_camera</v-icon></h2>
+        <h2 class="text-xs-center text-sm-left">Anthony Edens <v-icon large color="black">photo_camera</v-icon></h2>
       </v-flex>
       <v-flex xs12 sm7 md8 lg10 class="text-xs-center text-sm-right">
           <v-btn small="" fab flat href="https://www.facebook.com/caiogbrum?hc_ref=ARTaz6j3GvikrpH5RDRZugTvbHETU6XC00vTIeszRmhHGoP6L7tjxkZGjYcugiK7DXY">

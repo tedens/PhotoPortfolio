@@ -2,9 +2,9 @@
     <v-container fluid id="main_container">
         <v-jumbotron color="grey lighten-2" height="200px">
             <v-container>
-                <h3 class="display-3">Contato</h3>
+                <h3 class="display-3">Contact</h3>
                 <span class="subheading">
-                    Lorem ipsum dolor sit amet, pri veniam forensibus id. Vis maluisset molestiae id, ad semper lobortis cum. At impetus detraxit incorrupte usu, repudiare assueverit ex eum, ne nam essent vocent admodum.
+
                 </span>
             </v-container>
         </v-jumbotron>
@@ -19,7 +19,7 @@
                     </v-flex>
                     <v-flex xs12 sm6>
                         <v-text-field
-                            label="Nome"
+                            label="Name"
                             v-model="name"
                             :rules="nameRules"
                             required
@@ -33,7 +33,7 @@
                         <v-layout row wrap>
                             <v-flex xs12 sm6 pr-2>
                                 <v-text-field
-                                label="Telefone"
+                                label="Phone Number"
                                 v-model="telephone"
                                 :rules="telephoneRules"
                                 mask="(##)####-####"
@@ -41,19 +41,9 @@
                                 required
                                 ></v-text-field>
                             </v-flex>
-                            <v-flex xs12 sm6 pl-2>
-                                <v-text-field
-                                label="Celular"
-                                v-model="cellphone"
-                                :rules="cellphoneRules"
-                                mask="(##)#####-####"
-                                type="phone"
-                                required
-                                ></v-text-field>
-                            </v-flex>
                             <v-flex xs12>
                                 <v-text-field
-                                label="Descrição"
+                                label="Description"
                                 v-model="description"
                                 :rules="descriptionRules"
                                 multi-line
@@ -68,7 +58,7 @@
                                 color="success"
                                 elevation-6
                             >
-                                Enviar
+                                Submit
                                 <v-icon right>email</v-icon>
                             </v-btn>
                         </v-layout>
@@ -85,33 +75,29 @@ export default {
     valid: false,
     name: '',
     nameRules: [
-      v => !!v || 'Informe seu Nome'
+      v => !!v || 'Enter your Name'
     ],
     email: '',
     emailRules: [
-      v => !!v || 'Informe seu E-mail',
+      v => !!v || 'Enter your E-mail',
       v =>
         /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-        'E-mail inválido'
+        'E-mail invalid'
     ],
     telephone: '',
     telephoneRules: [
-      v => !!v || 'Informe seu Telefone',
-      v => v.length === 10 || 'Telefone inválido'
+      v => !!v || 'Enter your Phone Number',
+      v => v.length === 10 || 'Phone Number invalid'
     ],
-    cellphone: '',
-    cellphoneRules: [
-      v => !!v || 'Informe seu Celular',
-      v => (v.length >= 10 && v.length <= 11) || 'Celular inválido'],
     description: '',
     descriptionRules: [
-      v => !!v || 'Informe a Descrição do seu pedido',
-      v => v.length <= 255 || 'Sua descrição deve conter no máximo 255 caracteres'
+      v => !!v || 'Enter a Description of the type of service you are looking for.',
+      v => v.length <= 1001 || 'The description should be no more than 1000 characters.'
     ]
   }),
   methods: {
     submit () {
-      console.log('SUBMIT')
+      //send email out to me from SES
       return true
     }
   }
@@ -128,5 +114,3 @@ export default {
     filter: grayscale(100%);
 }
 </style>
-
-
