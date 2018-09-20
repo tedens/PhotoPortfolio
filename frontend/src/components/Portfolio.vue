@@ -59,7 +59,7 @@ export default {
   }),
   methods: {
     getPhotos () {
-      this.$http.get(this.$root.apiUrl + "photos").then(function(data) {
+      this.$http.get(this.$root.apiUrl + 'photos').then(function (data) {
         console.log(data)
       })
     },
