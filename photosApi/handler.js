@@ -1,48 +1,59 @@
 'use strict';
+var AWS = require('aws-sdk');
+var s3 = new AWS.S3();
 
 module.exports.getAllPhotos = async (event, context) => {
-  var mysql      = require('mysql');
-  var connection = mysql.createConnection({
-      host     : 'photos.cluster-cswaejsadshe.us-east-1.rds.amazonaws.com',
-      database : 'photos',
-      user     : 'photo_user',
-      password : 'Hot989lev999!',
-  });
-
-  connection.connect(function(err) {
-      if (err) {
-          console.error('Error connecting: ' + err.stack);
-          return;
+  var params = {
+   Bucket: "photography-photos",
+   MaxKeys: 50
+  };
+  try{
+    var allKeys = [];
+    var res = await s3.listObjectsV2(params).promise();
+    res['Contents'].forEach((k) => {
+      if(k['Key'].includes(".jpg")){
+        allKeys.push(k['Key']);
       }
-
-      console.log('Connected as id ' + connection.threadId);
-  });
-
-  connection.query('SELECT * FROM photos', function (error, results, fields) {
-      if (error)
-          throw error;
-
-      results.forEach(result => {
-          console.log(result);
-      });
-  });
-  return {
+    });
+  } catch (err){
+    console.log(err.message);
+  }
+    return {
     statusCode: 200,
     body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
+      response: allKeys,
       input: event,
     }),
   };
+};
 
-  module.exports.getCategoryPhotos = async (event, context) => {
+module.exports.getCategoryPhotos = async (event, context) => {
+  if (event.body !== null && event.body !== undefined) {
+    let body = JSON.parse(event.body)
+    if (body.category)
+        var cat = body.category;
+  }
+  var params = {
+   Bucket: "photography-photos",
+   MaxKeys: 50,
+   Prefix: cat
+  };
+  try{
+    var allKeys = [];
+    var res = await s3.listObjectsV2(params).promise();
+    res['Contents'].forEach((k) => {
+      if(k['Key'].includes(".jpg")){
+        allKeys.push(k['Key']);
+      }
+    });
+  } catch (err){
+    console.log(err.message);
+  }
     return {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: 'Go Serverless v1.0! Your function executed successfully!',
-        input: event,
-      }),
-    };
-
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
+    statusCode: 200,
+    body: JSON.stringify({
+      response: allKeys,
+      input: event,
+    }),
+  };
 };

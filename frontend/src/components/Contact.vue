@@ -97,7 +97,7 @@ export default {
   }),
   methods: {
     submit () {
-      //send email out to me from SES
+      // send email out to me from SES
       return true
     }
   }

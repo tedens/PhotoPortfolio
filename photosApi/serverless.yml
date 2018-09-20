@@ -58,8 +58,16 @@ provider:
 functions:
   getAllPhotos:
     handler: handler.getAllPhotos
+    events:
+      - http:
+          method: get
+          path: photos
   getCategoryPhotos:
     handler: handler.getCategoryPhotos
+    events:
+      - http:
+          method: post
+          path: photos
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

@@ -49,20 +49,27 @@
 
 <script>
 export default {
+  props: ['apiUrl'],
   data: () => ({
     images: [
     ],
     categories: [
-      'Events', 'Nature', 'Portraits', 'Animals'
+      'All', 'Events', 'Nature', 'Portraits', 'Animals'
     ]
   }),
-  methods:
-    getPhotos(){
-      //open serverless rds to get list of photos (last 50 and lazy load them in)
+  methods: {
+    getPhotos () {
+      this.$http.get(this.$root.apiUrl + "photos").then(function(data) {
+        console.log(data)
+      })
     },
-    getSpecificPhotos(event){
-      //open serverless rds and get all images that match the event type
+    getSpecificPhotos (event) {
+      // open serverless rds and get all images that match the event type
     }
+  },
+  beforeMount: function () {
+    this.getPhotos()
+  }
 }
 </script>
 
