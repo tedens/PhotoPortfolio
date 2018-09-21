@@ -34,8 +34,8 @@
                     >
                         <v-card flat tile>
                             <v-card-media
-                            :src="image.src"
-                            height="200px"
+                            :src="image"
+                            height="400px"
                             >
                             </v-card-media>
                         </v-card>
@@ -58,12 +58,13 @@ export default {
     ]
   }),
   methods: {
-    getPhotos () {
-      this.$http.get(this.$root.apiUrl + 'photos').then(function (data) {
-        console.log(data)
-      })
+    async getPhotos () {
+      var temp = await this.axios.get(this.$root.apiUrl + 'photos')
+      for (var x of temp.data.response) {
+        this.images.push('https://photos.tjedens.com/' + x)
+      }
     },
-    getSpecificPhotos (event) {
+    async getSpecificPhotos (event) {
       // open serverless rds and get all images that match the event type
     }
   },

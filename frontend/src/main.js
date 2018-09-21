@@ -12,7 +12,7 @@ Vue.use(Vuetify)
 Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
-const api = 'https://nlkx7ae1v0.execute-api.us-east-1.amazonaws.com/prod/'
+const api = 'https://api.tjedens.com/'
 
 /* eslint-disable no-new */
 new Vue({

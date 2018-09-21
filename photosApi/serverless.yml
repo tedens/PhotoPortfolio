@@ -21,7 +21,8 @@ provider:
   name: aws
   runtime: nodejs8.10
   profile: personal
-
+  stage: ${opt:stage, 'dev'}
+  
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
@@ -62,12 +63,14 @@ functions:
       - http:
           method: get
           path: photos
+          cors: true
   getCategoryPhotos:
     handler: handler.getCategoryPhotos
     events:
       - http:
           method: post
           path: photos
+          cors: true
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
