@@ -12,7 +12,8 @@ Vue.use(Vuetify)
 Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
-const api = 'https://api.tjedens.com/'
+const api = process.env.API_HOST
+const cdn = process.env.CDN
 
 /* eslint-disable no-new */
 new Vue({
@@ -20,5 +21,5 @@ new Vue({
   router,
   components: { App },
   template: '<App/>',
-  data: { apiUrl: api }
+  data: { apiUrl: api, cdnUrl: cdn }
 })

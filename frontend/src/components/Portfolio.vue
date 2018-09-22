@@ -53,7 +53,8 @@ export default {
   data: () => ({
     images: [],
     categories: ['All'],
-    search: 'All'
+    search: 'All',
+    loading: true
   }),
   watch: {
     search: 'getSpecificPhotos'
@@ -63,7 +64,7 @@ export default {
       this.clearImages()
       var temp = await this.axios.get(this.$root.apiUrl + 'photos')
       for (var x of temp.data.response) {
-        this.images.push('https://photos.tjedens.com/' + x)
+        this.images.push(this.$root.cdnUrl + x)
       }
     },
     async getSpecificPhotos (event) {
@@ -73,7 +74,7 @@ export default {
         var temp = await this.axios.post(this.$root.apiUrl + 'photos', {'category': event})
         this.images = []
         for (var x of temp.data.response) {
-          this.images.push('https://photos.tjedens.com/' + x)
+          this.images.push(this.$root.cdnUrl + x)
         }
       }
     },
