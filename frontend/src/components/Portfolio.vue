@@ -11,7 +11,7 @@
                 <v-container fluid row wrap py-0>
                     <v-layout row wrap>
                         <v-flex xs3 my-0 pr-2>
-                            <v-select label="Categories" my-0 py-0
+                            <v-select v-model="search" label="Categories" my-0 py-0
                             :items="categories"></v-select>
                         </v-flex>
                         <v-flex px-2>
@@ -51,25 +51,45 @@
 export default {
   props: ['apiUrl'],
   data: () => ({
-    images: [
-    ],
-    categories: [
-      'All', 'Events', 'Nature', 'Portraits', 'Animals'
-    ]
+    images: [],
+    categories: ['All'],
+    search: 'All'
   }),
+  watch: {
+    search: 'getSpecificPhotos'
+  },
   methods: {
     async getPhotos () {
+      this.clearImages()
       var temp = await this.axios.get(this.$root.apiUrl + 'photos')
       for (var x of temp.data.response) {
         this.images.push('https://photos.tjedens.com/' + x)
       }
     },
     async getSpecificPhotos (event) {
-      // open serverless rds and get all images that match the event type
+      if (event === 'All') {
+        this.getPhotos()
+      } else {
+        var temp = await this.axios.post(this.$root.apiUrl + 'photos', {'category': event})
+        this.images = []
+        for (var x of temp.data.response) {
+          this.images.push('https://photos.tjedens.com/' + x)
+        }
+      }
+    },
+    async getCategories () {
+      var temp = await this.axios.get(this.$root.apiUrl + 'categories')
+      for (var x of temp.data.response) {
+        this.categories.push(x)
+      }
+    },
+    async clearImages () {
+      this.images = []
     }
   },
   beforeMount: function () {
     this.getPhotos()
+    this.getCategories()
   }
 }
 </script>

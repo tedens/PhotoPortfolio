@@ -22,7 +22,7 @@ provider:
   runtime: nodejs8.10
   profile: personal
   stage: ${opt:stage, 'dev'}
-  
+
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
@@ -70,6 +70,13 @@ functions:
       - http:
           method: post
           path: photos
+          cors: true
+  getCategories:
+    handler: handler.getCategories
+    events:
+      - http:
+          method: get
+          path: categories
           cors: true
 
 #    The following are a few example events you can configure

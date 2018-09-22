@@ -23,7 +23,7 @@ module.exports.getAllPhotos = async (event, context) => {
     headers: {
         "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
         "Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
-      },
+    },
     body: JSON.stringify({
       response: allKeys,
       input: event,
@@ -58,7 +58,37 @@ module.exports.getCategoryPhotos = async (event, context) => {
     headers: {
         "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
         "Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
-      },
+    },
+    body: JSON.stringify({
+      response: allKeys,
+      input: event,
+    }),
+  };
+};
+
+
+module.exports.getCategories = async (event, context) => {
+  var params = {
+   Bucket: "photography-photos",
+   MaxKeys: 50,
+   Delimiter: "/"
+  };
+  try{
+    var allKeys = [];
+    var res = await s3.listObjectsV2(params).promise();
+    console.log(res)
+    res['CommonPrefixes'].forEach((k) => {
+      allKeys.push(k['Prefix'].replace('/', ''));
+    });
+  } catch (err){
+    console.log(err.message);
+  }
+    return {
+    statusCode: 200,
+    headers: {
+        "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
+        "Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
+    },
     body: JSON.stringify({
       response: allKeys,
       input: event,
